@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Pegggy/list#readme",
   "devDependencies": {
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.5.5"
   },
   "dependencies": {
