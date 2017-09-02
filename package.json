@@ -2,6 +2,7 @@
   "name": "list",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pegggy.github.io/list",
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
