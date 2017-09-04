@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import TodoInput from './todoInput';
 import TodoItem from './todoItem';
 import 'normalize.css';
 import './reset.css';
-import './todoInput.css';
+
 
 
 class App extends Component {
@@ -41,7 +41,7 @@ class App extends Component {
       <div className="App">
         <h1>我的待办</h1>
         <div className="inputWrapper">
-          <TodoInput className="TodoInput" content={this.state.newTodo}  />
+          <TodoInput content={this.state.newTodo}  />
         </div>  
         <ol>
           {todos}
