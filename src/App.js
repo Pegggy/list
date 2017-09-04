@@ -4,6 +4,7 @@ import './App.css';
 import TodoInput from './todoInput';
 import TodoItem from './todoItem';
 import 'normalize.css';
+import './reset.css'
 
 class App extends Component {
   constructor(props){
