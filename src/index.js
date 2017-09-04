@@ -5,10 +5,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 
-
-const element = <App />
   ReactDOM.render(
-    element,
+    <App />,
     document.getElementById('root')
   )
 

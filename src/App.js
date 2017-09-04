@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TodoInput from './todoInput';
+import TodoItem from './todoItem';
 
 class App extends Component {
   constructor(props){
@@ -10,7 +11,15 @@ class App extends Component {
         newTodo: 'task1',
         todoList:[
           {id:1,
-          title:'第一个待办',
+          title:'买菜',
+          status:'completed',
+          delete: false},
+          {id:2,
+          title:'烧饭',
+          status:'completed',
+          delete: false},
+          {id:3,
+          title:'吃西瓜',
           status:'completed',
           delete: false}
         ]
@@ -18,7 +27,11 @@ class App extends Component {
   }
   render(){
     let todos = this.state.todoList.map((item,index)=>{
-      return <li>{item.title}</li>
+      return(
+      <li>
+        <TodoItem todo={item} />  
+      </li>
+      )
     })
     return (
       <div className="App">
