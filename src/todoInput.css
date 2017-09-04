@@ -1,0 +1,11 @@
+.TodoInput{
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 1.8em;
+  color: #666;
+  line-height: 1.8em;
+  margin-bottom: 10px;
+  width: 100%;
+  font-weight: 200;
+}

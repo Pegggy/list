@@ -4,7 +4,9 @@ import './App.css';
 import TodoInput from './todoInput';
 import TodoItem from './todoItem';
 import 'normalize.css';
-import './reset.css'
+import './reset.css';
+import './todoInput.css';
+
 
 class App extends Component {
   constructor(props){
@@ -39,7 +41,7 @@ class App extends Component {
       <div className="App">
         <h1>我的待办</h1>
         <div className="inputWrapper">
-          <TodoInput content={this.state.newTodo} />
+          <TodoInput className="TodoInput" content={this.state.newTodo}  />
         </div>  
         <ol>
           {todos}
