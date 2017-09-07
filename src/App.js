@@ -51,14 +51,14 @@ class App extends Component {
       </li>
       )
     })
-    
+
     return (
       <div className="App">
         <h1>我的待办</h1>
         <div className="inputWrapper">
           <TodoInput content={this.state.newTodo}  onSubmit={this.addTodo.bind(this)} onChange={this.changTitle.bind(this)} />
         </div>  
-        <ol>
+        <ol className="todolist">
           {todos}
         </ol>
       </div>
