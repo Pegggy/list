@@ -2,12 +2,11 @@ import React,{Component} from 'react';
 import './todoitem.css';
 export default class TodoItem extends Component{
   render(){
-    return <div> 
+    return <div className="todo-item"> 
       <input type="checkbox" checked={this.props.todo.status==='completed'} 
-        className="todo-item" onChange={this.toggle.bind(this)}/>
-      {this.props.todo.title}
+         onChange={this.toggle.bind(this)}/>
+      <span>{this.props.todo.title}</span>
       <button className="del" onClick={this.delete.bind(this)}>删除</button>
-    
     </div>
   }
   toggle(e){
