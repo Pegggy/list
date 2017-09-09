@@ -7,11 +7,14 @@
   display: flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
+  background: rgba(0, 0,0, .3);
 }
 .UserDialog{
   border-radius: 3px;
   background: #fff;
   min-width: 20em;
+  height: 20em;
   box-shadow: 6px 8px 20px 2px rgba(0,0,0,0.37);
 }
 .UserDialog > nav:first-child{
