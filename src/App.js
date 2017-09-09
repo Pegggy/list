@@ -4,7 +4,12 @@ import TodoInput from './todoInput';
 import TodoItem from './todoItem';
 import 'normalize.css';
 import './reset.css';
-import * as localStore from './localStore'
+import * as localStore from './localStore';
+import AV from 'leanclond-storage';
+
+const appId = 'lhnGAvlnkiAuvCfGApyI8vLn-gzGzoHsz';
+const appKey = 'mcnNtPno10tnYn3GJhk7jipk';
+AV.init({ appId, appKey });
 
 class App extends Component {
   constructor(props){
