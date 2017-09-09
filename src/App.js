@@ -5,11 +5,14 @@ import TodoItem from './todoItem';
 import 'normalize.css';
 import './reset.css';
 import * as localStore from './localStore';
-import AV from 'leanclond-storage';
+import AV from 'leancloud-storage';
 
 const appId = 'lhnGAvlnkiAuvCfGApyI8vLn-gzGzoHsz';
 const appKey = 'mcnNtPno10tnYn3GJhk7jipk';
-AV.init({ appId, appKey });
+AV.init({
+  appId: appId,
+  appKey: appKey
+});
 
 class App extends Component {
   constructor(props){
@@ -75,4 +78,11 @@ function idSet(){
   ++id;
   return id;
 }
+var TestObject = AV.Object.extend('TestObject');
+var testObject = new TestObject();
+testObject.save({
+  todoList: '我要吃午饭'
+}).then(function(object) {
+  alert('LeanCloud Rocks!');
+})
 export default App;
