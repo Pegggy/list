@@ -4,13 +4,16 @@ import TodoInput from './todoInput';
 import TodoItem from './todoItem';
 import 'normalize.css';
 import './reset.css';
+import UserDialog from './userDialog';
+
 
 class App extends Component {
   constructor(props){
     super(props)
       this.state = {
         newTodo: '',
-        todoList:[]
+        todoList:[],
+        user: {}
       }
   }
     changTitle(e){
@@ -42,24 +45,34 @@ class App extends Component {
       todo.delete = true
       this.setState(this.state)
     }
-  render(){
-    let todos = this.state.todoList.filter(item => item.delete === false)
-                                   .map((item,index) =>{
-      return(
-      <li key={index}>
-        <TodoItem todo={item} onToggle={this.toggle.bind(this)} onDelete={this.delete.bind(this)}/>  
-      </li>
-      )
-    })
+    onSignUp(user){
+      this.state.user = user
+      this.setState(this.state)
+    }
+    render(){
+    let todos = this.state.todoList
+                  .filter(item => item.delete === false)
+                    .map((item,index) =>{
+                      return(
+                      <li key={index}>
+                        <TodoItem todo={item} 
+                        onToggle={this.toggle.bind(this)} 
+                        onDelete={this.delete.bind(this)}/>  
+                      </li>
+                      )
+                    })
     return (
       <div className="App">
-        <h1>我的待办</h1>
+        <h1>{this.state.user.username||'我'}的待办</h1>
         <div className="inputWrapper">
-          <TodoInput content={this.state.newTodo}  onSubmit={this.addTodo.bind(this)} onChange={this.changTitle.bind(this)} />
+          <TodoInput content={this.state.newTodo}  
+          onSubmit={this.addTodo.bind(this)} 
+          onChange={this.changTitle.bind(this)} />
         </div>  
         <ol className="todolist">
           {todos}
         </ol>
+        <UserDialog onSignUp={this.onSignUp.bind(this)} />
       </div>
     )
   }
