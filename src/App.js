@@ -33,7 +33,7 @@ class App extends Component {
         newTodo:'',
         todoList: this.state.todoList
       })
-   }
+    }
     componentDidUpdate(){
       
     }
@@ -51,12 +51,18 @@ class App extends Component {
       console.log(stateCopy);
       this.setState(stateCopy)
     }
+    onSignIn(user){
+      let stateCopy = JSON.parse(JSON.stringify(this.state))
+      stateCopy.user = user
+      this.setState(stateCopy)
+    }
     signOut(){
       signOut()
       let stateCopy = JSON.parse(JSON.stringify(this.state))
       stateCopy.user = {}
       this.setState(stateCopy)
     }
+
     render(){
     let todos = this.state.todoList
         .filter(item => item.delete === false)
@@ -82,7 +88,9 @@ class App extends Component {
         <ol className="todolist">
           {todos}
         </ol>
-       {this.state.user.id ? null : <UserDialog onSignUp={this.onSignUp.bind(this)} />}
+       {this.state.user.id ? null : 
+       <UserDialog onSignUp={this.onSignUp.bind(this)} 
+       onSignIn={this.onSignIn.bind(this)}/>}
       </div>
     )
   }
