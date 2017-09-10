@@ -5,7 +5,7 @@ import TodoItem from './todoItem';
 import 'normalize.css';
 import './reset.css';
 import UserDialog from './userDialog';
-
+import {getCurrentUser} from './leanCloud'
 
 class App extends Component {
   constructor(props){
@@ -13,7 +13,7 @@ class App extends Component {
       this.state = {
         newTodo: '',
         todoList:[],
-        user: {}
+        user: getCurrentUser()||{}
       }
   }
     changTitle(e){
