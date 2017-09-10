@@ -38,7 +38,8 @@ export default class UserDialog extends Component{
   }
   render(){
     let signUpForm = (
-      <form className="signUp" onSubmit={this.signUp.bind(this)}>{/*注册*/}
+      <form className="signUp" 
+      onSubmit={this.signUp.bind(this)}>{/*注册*/}
         <div className="row">
           <label>用户名：</label>
           <input type="text" name="username" value={this.state.formData.username}
@@ -74,9 +75,15 @@ export default class UserDialog extends Component{
     return(
       <div className="UserDialog-Wrapper">
         <div className="UserDialog">
-          <nav onChange={this.switch.bind(this)}>
-            <label><input type="radio" value="signUp" checked={this.state.selected === "signUp"}/>注册</label>
-            <label><input type="radio" value="signIn" checked={this.state.selected === "signIn"}/>登录</label>
+          <nav>
+            <label>
+            <input type="radio" value="signUp" 
+              checked={this.state.selected === "signUp"}
+              onChange={this.switch.bind(this)}/>注册</label>
+            <label>
+            <input type="radio" value="signIn" 
+            checked={this.state.selected === "signIn"}
+            onChange={this.switch.bind(this)}/>登录</label>
           </nav>
           <div className="panels">
           {this.state.selected === 'signUp'? signUpForm : null}

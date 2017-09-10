@@ -46,21 +46,22 @@ class App extends Component {
       this.setState(this.state)
     }
     onSignUp(user){
-      this.state.user = user
-      this.setState(this.state)
+      let stateCopy = JSON.parse(JSON.stringify(this.state))
+      stateCopy = user
+      this.setState(stateCopy)
     }
     render(){
     let todos = this.state.todoList
-                  .filter(item => item.delete === false)
-                    .map((item,index) =>{
-                      return(
-                      <li key={index}>
-                        <TodoItem todo={item} 
-                        onToggle={this.toggle.bind(this)} 
-                        onDelete={this.delete.bind(this)}/>  
-                      </li>
-                      )
-                    })
+        .filter(item => item.delete === false)
+          .map((item,index) =>{
+            return(
+            <li key={index}>
+              <TodoItem todo={item} 
+              onToggle={this.toggle.bind(this)} 
+              onDelete={this.delete.bind(this)}/>  
+            </li>
+            )
+          })
     return (
       <div className="App">
         <h1>{this.state.user.username||'我'}的待办</h1>
