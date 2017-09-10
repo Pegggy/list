@@ -25,7 +25,6 @@ export function signUp(username,password,successFn,errorFn){
 }
 
 function getUserFromAVUser(AVUser){
-  console.log(AVUser.id,...AVUser.attributes)
   return {
     id: AVUser.id,
     ...AVUser.attributes
