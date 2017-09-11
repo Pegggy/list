@@ -38,11 +38,11 @@
   padding-left: 4em; 
   position: relative;
 }
-.UserDialog-Wrapper .row.actions>button,.signIn >.row.actions>a{
+.UserDialog-Wrapper .row.actions>button,.row.actions>a,.row.actions>a{
   padding: 3px 5px;
   border-radius: 3px;
 }
-.signIn >.row.actions>a{
+.row.actions>a{ 
   text-decoration: none;
   color: #000;
   border: 1px solid rgb(186,186,186);

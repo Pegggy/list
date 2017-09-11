@@ -78,6 +78,11 @@ export default class UserDialog extends Component{
     stateCopy.selectedTab = 'forgetPassword'
     this.setState(stateCopy)
   }
+  returnToSignIn(){
+    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    stateCopy.selectedTab = "signUpOrSignIn"
+    this.setState(stateCopy)
+  }
   render(){
     let signUpForm = (
       <form className="signUp" 
@@ -160,6 +165,7 @@ export default class UserDialog extends Component{
           </div>
           <div className="row actions">
             <button type="submit">重置密码</button>
+            <a href="#" onClick={this.returnToSignIn.bind(this)}>返回登录</a>
           </div>
         </form>
       </div>

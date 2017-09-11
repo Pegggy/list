@@ -56,6 +56,6 @@ export function resetPasswordByEmail(email,successFn,errorFn){
   AV.User.requestPasswordReset(email).then(function (success) {
     successFn.call()
   }, function (error) {
-    console.dir(error)
+    errorFn.call(null,error)
   });
 }
