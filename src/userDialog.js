@@ -43,7 +43,9 @@ export default class UserDialog extends Component{
         alert(error)
       }
     }
-    signUp(username,password,success,error)
+    if(username && password){
+      signUp(username,password,success,error)
+    }    
   }
   signIn(e){
     e.preventDefault()
@@ -89,7 +91,8 @@ export default class UserDialog extends Component{
       onSubmit={this.signIn.bind(this)}>{/*登录*/}
         <div className="row">
           <label>用户名：</label>
-          <input type="text" name="username"  value={this.state.formData.username} 
+          <input type="text" name="username"  
+          value={this.state.formData.username} 
           onChange={this.changeFormData.bind(this)}/>
         </div>
         <div className="row">
@@ -99,6 +102,7 @@ export default class UserDialog extends Component{
         </div>
         <div className="row actions">
           <button type="submit">登录</button>
+          <a href="javascript:;">忘记密码</a>
         </div>
       </form>
     )

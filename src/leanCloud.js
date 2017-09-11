@@ -48,6 +48,6 @@ export function signIn(username,password,successFn,errorFn){
     let user = getUserFromAVUser(loginedUser)
     successFn.call(null,user)
   }, function (error) {
-    errorFn(error)
+    errorFn.call(null,error)
   });
 }
