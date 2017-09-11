@@ -52,3 +52,10 @@ export function signIn(username,password,successFn,errorFn){
     errorFn.call(null,error)
   });
 }
+export function resetPasswordByEmail(email,successFn,errorFn){
+  AV.User.requestPasswordReset(email).then(function (success) {
+    successFn.call()
+  }, function (error) {
+    console.dir(error)
+  });
+}
