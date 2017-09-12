@@ -1,15 +1,13 @@
 import React,{Component} from 'react'
 import './userDialog.css'
 import {signUp,signIn,resetPasswordByEmail} from './leanCloud'
-import SignUpForm from './signupform'
-import SignInForm from './signinform'
+import SignUpOrSignIn from './signuporsignin'
 import ForgetPassword from './forgetpassword'
 
 export default class UserDialog extends Component{
   constructor(props){
     super(props)
     this.state = {
-      selected: 'signUp',
       selectedTab: 'signUpOrSignIn',
       formData:{
         username:'',
@@ -18,16 +16,14 @@ export default class UserDialog extends Component{
       }
     }
   }
-  switch(e){
-    this.setState({
-      selected: e.target.value
-    })
-  }
 
-  changeFormData(e){
-    const attr = e.target.name
+  changeFormData(key,e){
+    //let attr = e.target.name
+    //无法通过 attr 取值，因为是获取到 SignUpOrSignIn组件下的SignInForm 的 input 输入框的 name 值
+    //无法将 name 值传递进来，所有直接传递 key 来获取是 username / password / email
+    //并且 key 必须是第一个参数，若是第二个参数，则运行时 bind(this)报错为 undefined
     let stateCopy = JSON.parse(JSON.stringify(this.state))
-    stateCopy.formData[attr] = e.target.value
+    stateCopy.formData[key] = e.target.value
     this.setState(stateCopy)
   }  
   signUp(e){
@@ -84,60 +80,19 @@ export default class UserDialog extends Component{
   returnToSignIn(){
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.selectedTab = "signUpOrSignIn"
+    stateCopy.formData.email = ''
     this.setState(stateCopy)
   }
   render(){
-    let signUpOrSignIn = (
-      <div className="signUpOrSignIn">
-        <nav>
-          <label>
-            <input type="radio" value="signUp" 
-            checked={this.state.selected === 'signUp'} 
-            onChange={this.switch.bind(this)} />
-            注册
-          </label>
-          <label>
-            <input type="radio" value="signIn" 
-            checked={this.state.selected === 'signIn'} 
-            onChange={this.switch.bind(this)} />
-             登录
-          </label>          
-        </nav>
-        <div className="panels">
-          {this.state.selected === "signUp" ? 
-          <SignUpForm formData={this.state.formData} 
-          onSubmit={this.signUp.bind(this)}
-          onChange={this.changeFormData.bind(this)} /> : null}
-          {this.state.selected === "signIn" ? 
-          <SignInForm formData={this.state.formData} 
-          onSubmit={this.signIn.bind(this)} 
-          onChange={this.changeFormData.bind(this)} 
-          onFogetPassword={this.showFogetPassword.bind(this)}/>: null}
-        </div>
-      </div>
-    )
-    // let forgetPassword = (
-    //   <div className="forgetPassword">
-    //     <h3>重置密码</h3>
-    //     <form  className="forgetPassword" 
-    //     onSubmit={this.resetPassword.bind(this)}>
-    //       <div className="row">
-    //         <label>邮箱：
-    //           <input type="text" name="email" value={this.state.formData.email}
-    //           onChange={this.changeFormData.bind(this)} />
-    //         </label>
-    //       </div>
-    //       <div className="row actions">
-    //         <button type="submit">重置密码</button>
-    //         <a href="#" onClick={this.returnToSignIn.bind(this)}>返回登录</a>
-    //       </div>
-    //     </form>
-    //   </div>
-    // )
     return(
       <div className="UserDialog-Wrapper">
         <div className="UserDialog">
-          {this.state.selectedTab === 'signUpOrSignIn'? signUpOrSignIn : <ForgetPassword 
+          {this.state.selectedTab === 'signUpOrSignIn'? <SignUpOrSignIn 
+          formData={this.state.formData} onSignUp={this.signUp.bind(this)} 
+          onSignIn={this.signIn.bind(this)} 
+          onChange={this.changeFormData.bind(this)} 
+          onFogetPassword={this.showFogetPassword.bind(this)}
+          /> : <ForgetPassword 
           onSubmit={this.resetPassword.bind(this)} 
           formData={this.state.formData} 
           onChange={this.changeFormData.bind(this)}
