@@ -6,7 +6,7 @@ import 'normalize.css'
 import './reset.css'
 import UserDialog from './userDialog'
 import {getCurrentUser,signOut} from './leanCloud'
-import SaveTodo from './leanstore'
+import {addTodo} from './leanstore'
 
 class App extends Component {
   constructor(props){
@@ -24,17 +24,19 @@ class App extends Component {
       })
     }
     addTodo(e){
-      this.state.todoList.push({
+      let todoitem = {
         id: idSet(),
         title: e.target.value,
         status: '',
         delete: false
-      })
+      }
+      this.state.todoList.push(todoitem)
+      addTodo(todoitem,this.state.user.id)
       this.setState({
         newTodo:'',
         todoList: this.state.todoList
       })
-      SaveTodo();
+
     }
     componentDidUpdate(){
       
