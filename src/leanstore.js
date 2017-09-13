@@ -1,7 +1,7 @@
 import AV from 'leancloud-storage'
 // 声明类型
 export default AV
-let TodoFolder = AV.Object.extend('TodoFolder');
+
 export function addTodo(todoitem,userid){
   // 新建对象
   let todoFolder = new TodoFolder();

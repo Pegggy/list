@@ -5,8 +5,8 @@ import TodoItem from './todoItem'
 import 'normalize.css'
 import './reset.css'
 import UserDialog from './userDialog'
-import {getCurrentUser,signOut} from './leanCloud'
-import {addTodo} from './leanstore'
+import {getCurrentUser,signOut,TodoModel} from './leanCloud'
+
 
 class App extends Component {
   constructor(props){
@@ -15,6 +15,16 @@ class App extends Component {
         newTodo: '',
         todoList:[],
         user: getCurrentUser()||{}
+      }
+      let user = getCurrentUser()
+      if(user){
+        TodoModel.getByUser(user,(todolist)=>{
+          let stateCopy = JSON.parse(JSON.stringify(this.state))
+          stateCopy.todoList = todolist
+          this.setState(stateCopy)
+        },(error)=>{
+          console.log(error)
+        })
       }
   }
     changTitle(e){
@@ -25,18 +35,21 @@ class App extends Component {
     }
     addTodo(e){
       let todoitem = {
-        id: idSet(),
         title: e.target.value,
         status: '',
-        delete: false
+        deleted: false
       }
-      this.state.todoList.push(todoitem)
-      addTodo(todoitem,this.state.user.id)
-      this.setState({
-        newTodo:'',
-        todoList: this.state.todoList
+      TodoModel.create(todoitem,(id)=>{
+        todoitem.id = id
+        console.log(todoitem)
+        this.state.todoList.push(todoitem)
+        this.setState({
+          newTodo:'',
+          todoList: this.state.todoList
+        },(error)=>{
+          console.log(error)
+        })
       })
-
     }
     componentDidUpdate(){
       
@@ -46,7 +59,7 @@ class App extends Component {
       this.setState(this.state)
     }
     delete(e,todo){
-      todo.delete = true
+      todo.deleted = true
       this.setState(this.state)
     }
     onSign(user){
@@ -64,7 +77,7 @@ class App extends Component {
 
     render(){
     let todos = this.state.todoList
-        .filter(item => item.delete === false)
+        .filter(item => item.deleted === false)
           .map((item,index) =>{
             return(
             <li key={index}>
@@ -93,11 +106,6 @@ class App extends Component {
       </div>
     )
   }
-}
-let id = 0;
-function idSet(){
-  ++id;
-  return id;
 }
 
 export default App;

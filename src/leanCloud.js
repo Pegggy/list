@@ -8,7 +8,33 @@ AV.init({
 });
 
 export default AV
+export const TodoModel = {
+  create({title,status,deleted},successFn,errorFn){
+    let Todo = AV.Object.extend('Todo')
+    let todo = new Todo()
+    todo.set('title',title)
+    todo.set('status',status)
+    todo.set('deleted',deleted)
+    todo.save().then(function(response){
+      successFn.call(null,response.id)
+    },function(error){
+      errorFn && errorFn.call(null,error)
+    });
+  },
+  getByUser(user,successFn,errorFn){
+    let query = new AV.Query('Todo');
+    query.find().then(function (todos) {
+      let arr = todos.map(function(todo) {
+        return {id: todo.id,...todo.attributes}
+      });
+      console.log(arr)
+      successFn.call(null,arr)
+    }, function (error) {
+      errorFn && errorFn.call(null,error)
+    });
+  },
 
+}
 export function signUp(username,password,email,successFn,errorFn){
   var user = new AV.User()
   // 设置用户名
@@ -33,6 +59,7 @@ function getUserFromAVUser(AVUser){
 }
 export function getCurrentUser(){
   let currentUser = AV.User.current();
+
   if (currentUser) {
      return getUserFromAVUser(currentUser)
   }
