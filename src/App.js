@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import './App.css';
-import TodoInput from './todoInput';
-import TodoItem from './todoItem';
-import 'normalize.css';
-import './reset.css';
-import UserDialog from './userDialog';
+import React, { Component } from 'react'
+import './App.css'
+import TodoInput from './todoInput'
+import TodoItem from './todoItem'
+import 'normalize.css'
+import './reset.css'
+import UserDialog from './userDialog'
 import {getCurrentUser,signOut} from './leanCloud'
+import SaveTodo from './leanstore'
 
 class App extends Component {
   constructor(props){
@@ -33,6 +34,7 @@ class App extends Component {
         newTodo:'',
         todoList: this.state.todoList
       })
+      SaveTodo();
     }
     componentDidUpdate(){
       
