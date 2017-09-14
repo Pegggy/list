@@ -51,9 +51,7 @@ class App extends Component {
         })
       })
     }
-    componentDidUpdate(){
-      
-    }
+
     toggle(e,todo){
       let oldStatus = todo.status
       todo.status = todo.status === 'completed' ? '':'completed'

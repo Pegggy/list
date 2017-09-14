@@ -40,12 +40,7 @@ export const TodoModel = {
     });
   },
   destroy(todoId,successFn,errorFn){
-    var todo = AV.Object.createWithoutData('Todo', todoId);
-    todo.destroy().then(function (success) {
-      successFn && successFn.call(null)
-    }, function (error) {
-      errorFn && errorFn.call(null,error)
-    });
+    TodoModel.update({id:todoId,deleted: true},successFn,errorFn)
   },
   update({id,title,status,deleted},successFn,errorFn){
     // 第一个参数是 className，第二个参数是 objectId
