@@ -47,8 +47,20 @@ export const TodoModel = {
       errorFn && errorFn.call(null,error)
     });
   },
-
-
+  update({id,title,status,deleted},successFn,errorFn){
+    // 第一个参数是 className，第二个参数是 objectId
+    var todo = AV.Object.createWithoutData('Todo', id)
+    // 修改属性
+    title !== undefined && todo.set('title', title)
+    status !== undefined && todo.set('status', status)
+    deleted !== undefined && todo.set('deleted', deleted)
+    // 保存到云端
+    todo.save().then(function(response){
+      successFn && successFn.call(null,response)
+    },(error)=>{
+      errorFn && errorFn.call(null,error)
+    })
+  }
 }
 export function signUp(username,password,email,successFn,errorFn){
   var user = new AV.User()
