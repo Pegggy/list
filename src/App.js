@@ -73,6 +73,12 @@ class App extends Component {
     onSign(user){
       let stateCopy = JSON.parse(JSON.stringify(this.state))
       stateCopy.user = user
+      TodoModel.getByUser(user,(todos)=>{
+        console.log(todos)
+        stateCopy.todoList = todos
+      },(error)=>{
+        console.log(error)
+      })
       this.setState(stateCopy)
     }
 
@@ -80,6 +86,7 @@ class App extends Component {
       signOut()
       let stateCopy = JSON.parse(JSON.stringify(this.state))
       stateCopy.user = {}
+      stateCopy.todoList = []
       this.setState(stateCopy)
     }
 
@@ -98,7 +105,8 @@ class App extends Component {
     return (
       <div className="App">
         <h1>{this.state.user.username||'我'}的待办
-          {this.state.user.id ? <button onClick={this.signOut.bind(this)}>登出</button> : null}
+          {this.state.user.id ? <button className="signOut" 
+          onClick={this.signOut.bind(this)}>登出</button> : null}
         </h1>
         <div className="inputWrapper">
           <TodoInput content={this.state.newTodo}  

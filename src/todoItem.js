@@ -4,12 +4,12 @@ import './todoitem.css';
 export default function(props){
   return(
     <div className="todo-item"> 
-      <input type="checkbox" 
+      <input type="checkbox" className="toggle"
       checked={props.todo.status==='completed'} 
       onChange={toggle.bind(null,props)}/>
       <span>{props.todo.title}</span>
       <button className="del" 
-      onClick={deleted.bind(null,props)}>删除</button>
+      onClick={deleted.bind(null,props)}>✕</button>
     </div>
   )
 }

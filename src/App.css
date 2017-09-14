@@ -1,27 +1,44 @@
-.App {
+/* .App {
   color: #333;
   border: 1px solid #aaa;
   border-radius: 4px;
   background: #fff;
   margin: 2em;
   padding: 0 1em;
-  min-height: 20em;
   min-width: 32em;
   box-shadow: 0 0 1em hsla(0,0%,0%,.25);
+} */
+input[type="checkbox"],button{
+  outline: none;
 }
 @media screen and (min-width: 300px) and (max-width: 450px){
   .App{
     min-width: 18em;
   }
 }
-.App > .todolist > li:nth-child(odd){
-  background: #eee;
+.App{
+  position: relative;
+  
 }
-.App > .todolist > li:nth-child(even){
-  background: transparent;
+.App .todolist{
+}
+.App > .todolist > li{
+  font-size: 1.2em;
+  border-bottom: 1px solid #ededed;
+}
+.App .signOut{
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background: #f59f9b;
+  color: #fff;
+  padding: 8px 10px;
+  box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.19);
 }
 .App h1{
-  color: #EE7621;
+  color: #5bddc5;
   font-weight: 300;
   text-align: center;
 }

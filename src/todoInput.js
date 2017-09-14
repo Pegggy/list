@@ -3,7 +3,8 @@ import './todoInput.css';
 
 export default function(props){
   return (
-    <input type="text" className="TodoInput" 
+    <input type="text" placeholder="What needs to be done?" 
+    className="TodoInput" 
     value={props.content} 
     onChange={changTitle.bind(null,props)} 
     onKeyPress={submit.bind(null,props)}/>
