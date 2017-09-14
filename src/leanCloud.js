@@ -39,6 +39,15 @@ export const TodoModel = {
       errorFn && errorFn.call(null,error)
     });
   },
+  destroy(todoId,successFn,errorFn){
+    var todo = AV.Object.createWithoutData('Todo', todoId);
+    todo.destroy().then(function (success) {
+      successFn && successFn.call(null)
+    }, function (error) {
+      errorFn && errorFn.call(null,error)
+    });
+  },
+
 
 }
 export function signUp(username,password,email,successFn,errorFn){

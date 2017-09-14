@@ -26,7 +26,7 @@ class App extends Component {
           console.log(error)
         })
       }
-  }
+    }
     changTitle(e){
       this.setState({
         newTodo: e.target.value,
@@ -59,8 +59,12 @@ class App extends Component {
       this.setState(this.state)
     }
     delete(e,todo){
-      todo.deleted = true
-      this.setState(this.state)
+      TodoModel.destroy(todo.id,()=>{
+        todo.deleted = true
+        this.setState(this.state)
+      },(error)=>{
+        console.log(error)
+      })
     }
     onSign(user){
       let stateCopy = JSON.parse(JSON.stringify(this.state))
