@@ -7,7 +7,7 @@ export default function(props){
       <input type="checkbox" className="toggle"
       checked={props.todo.status==='completed'} 
       onChange={toggle.bind(null,props)}/>
-      <span>{props.todo.title}</span>
+      <span className={props.todo.status==='completed'?"completed":""}>{props.todo.title}</span>
       <button className="del" 
       onClick={deleted.bind(null,props)}>✕</button>
     </div>

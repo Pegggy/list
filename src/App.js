@@ -41,7 +41,6 @@ class App extends Component {
       }
       TodoModel.create(todoitem,(id)=>{
         todoitem.id = id
-        console.log(todoitem)
         this.state.todoList.push(todoitem)
         this.setState({
           newTodo:'',
@@ -76,10 +75,10 @@ class App extends Component {
       TodoModel.getByUser(user,(todos)=>{
         console.log(todos)
         stateCopy.todoList = todos
+        this.setState(stateCopy)
       },(error)=>{
         console.log(error)
       })
-      this.setState(stateCopy)
     }
 
     signOut(){
