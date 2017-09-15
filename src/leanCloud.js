@@ -33,7 +33,6 @@ export const TodoModel = {
       let arr = todos.map(function(todo) {
         return {id: todo.id,...todo.attributes}
       });
-      console.log(arr)
       successFn.call(null,arr)
     }, function (error) {
       errorFn && errorFn.call(null,error)

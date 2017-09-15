@@ -13,15 +13,16 @@ export default class UserDialog extends Component{
         username:'',
         password:'',
         email:''
+      },
+      info:{
+        username:'',
+        password:'',
+        email:''
       }
     }
   }
 
   changeFormData(key,e){
-    //let attr = e.target.name
-    //无法通过 attr 取值，因为是获取到 SignUpOrSignIn组件下的SignInForm 的 input 输入框的 name 值
-    //无法将 name 值传递进来，所有直接传递 key 来获取是 username / password / email
-    //并且 key 必须是第一个参数，若是第二个参数，则运行时 bind(this)报错为 undefined
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.formData[key] = e.target.value
     this.setState(stateCopy)
@@ -29,6 +30,7 @@ export default class UserDialog extends Component{
   signUp(e){
     e.preventDefault()
     let {username,password,email} = this.state.formData
+    console.log(username,password,email);
     let success = (user) =>{
       this.props.onSignUp.call(null,user)
     }
@@ -44,9 +46,19 @@ export default class UserDialog extends Component{
         alert(error)
       }
     }
-    if(username && password && email){
-      signUp(username,password,email,success,error)
-    }    
+    let showInfo = (type,info)=>{
+        console.log(type,info)
+        this.state.info[type] = info
+        this.setState(this.state)
+    }
+    let hideInfo = (type)=>{
+        this.state.info[type] = ''
+        this.setState(this.state)
+    }
+     if(checkUserName(username,hideInfo,showInfo) && checkPassword(password,hideInfo,showInfo) && checkEmail(email,hideInfo,showInfo)){
+       signUp(username,password,email,success,error)
+     }  
+
   }
   signIn(e){
     e.preventDefault()
@@ -88,7 +100,9 @@ export default class UserDialog extends Component{
       <div className="UserDialog-Wrapper">
         <div className="UserDialog">
           {this.state.selectedTab === 'signUpOrSignIn'? <SignUpOrSignIn 
-          formData={this.state.formData} onSignUp={this.signUp.bind(this)} 
+          formData={this.state.formData} 
+          info={this.state.info}
+          onSignUp={this.signUp.bind(this)} 
           onSignIn={this.signIn.bind(this)} 
           onChange={this.changeFormData.bind(this)} 
           onFogetPassword={this.showFogetPassword.bind(this)}
@@ -100,5 +114,55 @@ export default class UserDialog extends Component{
         </div>
       </div>
     )
+  }
+}
+function checkUserName(username,successFn,errorFn){
+    let info = ''
+		let arr_name = username.split('')
+		let num = 0
+		let len = arr_name.length
+		if(username == ""){
+      info = '姓名不能为空'
+      errorFn('username',info)
+			return false;
+		}else{		
+			for(var i = 0;i < len;i++){
+				if(/^[a-zA-Z0-9]$/g.test(arr_name[i])){
+					num += 1
+				}else{
+					num += 2
+				}
+			}
+			if(num < 4 || num > 16){
+        info = '请输入为4~16个字符'
+        errorFn('username',info)
+				return false
+			}else {
+        successFn('username')
+				return true
+      }
+		}
+}
+function checkPassword(password,successFn,errorFn){
+  let info = ''
+    if(/\w{8,16}/.test(password)){
+      successFn('password')
+      return true;	
+    }else{
+      info = '请输入8~16位密码'
+      errorFn('password',info)
+      return false
+    }
+}
+function checkEmail(email,successFn,errorFn){
+  var info = ''
+  var reg = /^[a-zA-Z0-9_]+@\w+\.[a-zA-Z0-9]+$/g;
+  if(reg.test(email)){
+    successFn('email')
+    return true
+  }else{
+    info = '邮箱输入错误'
+    errorFn('email',info)
+    return false
   }
 }

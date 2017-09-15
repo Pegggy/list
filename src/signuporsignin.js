@@ -35,6 +35,7 @@ export default class SignUpOrSignIn extends Component{
         <div className="panels" >
           {this.state.selected === "signUp" ? 
           <SignUpForm formData={this.props.formData} 
+          info = {this.props.info}
           onSubmit={this.props.onSignUp}
           onChange={this.props.onChange} /> : null}
           {this.state.selected  === "signIn" ? 

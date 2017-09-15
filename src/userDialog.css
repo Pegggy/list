@@ -75,16 +75,26 @@
   position: absolute;
   left: 5px;
   top: 9px;
-
 }
+.row .info{
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  color: #ec5959;
+  display: none;
+}
+.row .info.visiable{
+  display: block;
+}
+
 .row button{
   width: 250px;
   background: #f59f9b;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   color: #fff;
   border: none;
-
+  cursor: pointer;
 }
 .row.actions>button,.row.actions>a,.row.actions>a{
   border-radius: 3px;
