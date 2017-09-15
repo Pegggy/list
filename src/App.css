@@ -1,15 +1,7 @@
-/* .App {
-  color: #333;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  background: #fff;
-  margin: 2em;
-  padding: 0 1em;
-  min-width: 32em;
-  box-shadow: 0 0 1em hsla(0,0%,0%,.25);
-} */
-input[type="checkbox"],button{
+
+input[type="checkbox"],button,input[type="radio"],input[type="text"],input[type="password"]{
   outline: none;
+  -webkit-appearance: none;
 }
 @media screen and (min-width: 300px) and (max-width: 450px){
   .App{

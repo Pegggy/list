@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import SignInForm from './signinform'
 import SignUpForm from './signupform'
-
+import './signuporsignin.css'
 export default class SignUpOrSignIn extends Component{
   constructor(props){
     super(props)
@@ -19,13 +19,13 @@ export default class SignUpOrSignIn extends Component{
     return(
       <div className="signUpOrSignIn">
         <nav>
-          <label>
+          <label className={this.state.selected === 'signUp'? 'checked':''}>
             <input type="radio" value="signUp" 
             checked={this.state.selected === 'signUp'} 
             onChange={this.switch.bind(this)} />
             注册
           </label>
-          <label>
+          <label className={this.state.selected === 'signIn'? 'checked':''}>
             <input type="radio" value="signIn" 
             checked={this.state.selected === 'signIn'} 
             onChange={this.switch.bind(this)} />
